@@ -3,7 +3,7 @@ import axios from 'axios';
 import QRCode from 'qrcode.react';
 import { Spin } from 'antd';
 import AdditionalInformationForm from './components/AdditionalInformationForm';
-import { generateCode , editCode } from './client/codeGeneratorApiService';
+import { generateCode , editCode , baseUrl } from './client/codeGeneratorApiService';
 const App = () => {
   const [text, setText] = useState('');
   const [appOutput, setOutput] = useState('');
@@ -64,7 +64,7 @@ const App = () => {
   const handleAdditionalInformationSubmit = async (additionalInformation) => {
     setLoading(true);
     setAdditionalInformation({});
-    const response = await axios.get('http://localhost:4242/generate-code', {
+    const response = await axios.get(baseUrl + '/generate-code', {
       params: {
         applyExtraStyling: applyExtraStyling,
         requestedInformation: additionalInformation,
