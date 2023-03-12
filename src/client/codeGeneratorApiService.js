@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const isDevelopment = process.env.NODE_ENV == null || process.env.NODE_ENV === 'development';
 
-export const baseUrl = isDevelopment ? 'http://localhost:4242' : 'https://23.21.86.81:443';
+export const baseUrl = isDevelopment ? 'http://localhost:4242' : 'https://appgpt-backend.com';
 
 console.log('selecting baseUrl: ' + baseUrl);
 
