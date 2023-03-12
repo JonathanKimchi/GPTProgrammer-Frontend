@@ -46,20 +46,18 @@ const App = () => {
         break;
     }
     console.log("Response: ", response);
-    if (response.requestedInformation) {
+    if (response && response.requestedInformation) {
       setTempGeneratedCode(response.code);
       setApiResponse(response);
       setAdditionalInformation(response.requestedInformation);
-      setLoading(false);
     } else {
       setCodeState('edit');
-      setAdditionalInformation(null);
       setTempGeneratedCode(response.code);
       if (appOutput === '') {
         setOutput(response.result);
       }
-      setLoading(false);
     }
+    setLoading(false);
   };
 
   const handleAdditionalInformationSubmit = async (additionalInformation) => {
@@ -99,7 +97,7 @@ const App = () => {
         </label>
       </div>
       <button style={styles.button} onClick={handleSubmit}>Submit</button>
-      {loading && 
+      {false && 
         <div style={styles.loadingContainer}>
           <Spin tip="This request may take up to two minutes to complete. Give us a moment while our elves work..." />
         </div>

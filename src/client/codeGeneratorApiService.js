@@ -2,18 +2,21 @@ import axios from 'axios';
 
 const isDevelopment = process.env.NODE_ENV == null || process.env.NODE_ENV === 'development';
 
-const baseUrl = isDevelopment ? 'http://localhost:4242' : 'appgpt-backend:10000';
+const baseUrl = isDevelopment ? 'http://localhost:4242' : 'http://ec2-52-3-254-44.compute-1.amazonaws.com:4242';
 
 console.log('selecting baseUrl: ' + baseUrl);
 
 export const generateCode = async (prompt, applyExtraStyling, generatedCodeFolder = null) => {
   try {
+    const requestParams = {
+      prompt: prompt,
+      applyExtraStyling: applyExtraStyling,
+    }
+    if (generatedCodeFolder) {
+      requestParams.generatedCodeFolder = generatedCodeFolder;
+    }
     const response = await axios.get(baseUrl + '/generate-code', {
-      params: {
-        prompt: prompt,
-        applyExtraStyling: applyExtraStyling,
-        generatedCodeFolder: generatedCodeFolder,
-      },
+      params: requestParams,
     });
     return response.data.response;
   } catch (error) {
@@ -24,14 +27,20 @@ export const generateCode = async (prompt, applyExtraStyling, generatedCodeFolde
 
 export const editCode = async (prompt, code, generatedCodeFolder = null, pid = null) => {
   try {
+    const requestParams = {
+      prompt: prompt,
+      code: code,
+      applyExtraStyling: false,
+    }
+    if (generatedCodeFolder) {
+      requestParams.generatedCodeFolder = generatedCodeFolder;
+    }
+    if (pid) {
+      requestParams.pid = pid;
+    }
+
     const response = await axios.get(baseUrl + '/edit-code', {
-      params: {
-        prompt: prompt,
-        code: code,
-        applyExtraStyling: false,
-        generatedCodeFolder: generatedCodeFolder,
-        pid: pid,
-      },
+      params: requestParams,
     });
     return response.data.response;
   } catch (error) {
