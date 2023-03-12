@@ -53,6 +53,7 @@ const App = () => {
     } else {
       setCodeState('edit');
       setTempGeneratedCode(response.code);
+      setApiResponse(response);
       if (appOutput === '') {
         setOutput(response.result);
       }
