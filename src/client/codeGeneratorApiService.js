@@ -1,8 +1,14 @@
 import axios from 'axios';
 
+const isDevelopment = process.env.NODE_ENV == null || process.env.NODE_ENV === 'development';
+
+const baseUrl = isDevelopment ? 'http://localhost:4242' : 'http://appgpt-backend:10000';
+
+console.log('selecting baseUrl: ' + baseUrl);
+
 export const generateCode = async (prompt, applyExtraStyling, generatedCodeFolder = null) => {
   try {
-    const response = await axios.get('http://localhost:4242/generate-code', {
+    const response = await axios.get(baseUrl + '/generate-code', {
       params: {
         prompt: prompt,
         applyExtraStyling: applyExtraStyling,
@@ -18,7 +24,7 @@ export const generateCode = async (prompt, applyExtraStyling, generatedCodeFolde
 
 export const editCode = async (prompt, code, generatedCodeFolder = null, pid = null) => {
   try {
-    const response = await axios.get('http://localhost:4242/edit-code', {
+    const response = await axios.get(baseUrl + '/edit-code', {
       params: {
         prompt: prompt,
         code: code,
