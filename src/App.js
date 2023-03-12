@@ -97,7 +97,7 @@ const App = () => {
         </label>
       </div>
       <button style={styles.button} onClick={handleSubmit}>Submit</button>
-      {false && 
+      {loading && 
         <div style={styles.loadingContainer}>
           <Spin tip="This request may take up to two minutes to complete. Give us a moment while our elves work..." />
         </div>
