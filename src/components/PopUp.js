@@ -46,9 +46,9 @@ const PopupCard = () => {
           padding: '24px',
           borderRadius: '8px',
           boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+          width: '90%',
           backgroundColor: 'white',
           zIndex: 9999,
-          maxWidth: '90vw',
         }}
       >
         <p>Welcome to AppGPT! Here's how to use it:</p>
