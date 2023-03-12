@@ -4,6 +4,7 @@ import QRCode from 'qrcode.react';
 import { Spin } from 'antd';
 import AdditionalInformationForm from './components/AdditionalInformationForm';
 import { generateCode , editCode , baseUrl } from './client/codeGeneratorApiService';
+import PopupCard from './components/PopUp';
 const App = () => {
   const [text, setText] = useState('');
   const [appOutput, setOutput] = useState('');
@@ -78,6 +79,7 @@ const App = () => {
 
   return (
     <div style={styles.container}>
+      <PopupCard></PopupCard>
       <div style={styles.logo}>AppGPT</div>
       <textarea
         style={styles.textInput}
