@@ -11,6 +11,7 @@ const App = () => {
   const [applyExtraStyling, setApplyExtraStyling] = useState(false);
   const [requestedAdditionalInformation, setAdditionalInformation] = useState({});
   const [tempGeneratedCode, setTempGeneratedCode] = useState('');
+  const [apiResponse, setApiResponse] = useState({});
   const [codeState, setCodeState] = useState('initial');
 
   const handleTextInput = (e) => {
@@ -25,24 +26,34 @@ const App = () => {
     setLoading(true);
     var response;
     console.log("Code State: ", codeState);
+    var generatedCodeFolder;
+    var pid;
+    if (apiResponse && apiResponse.generatedCodeFolder) {
+      generatedCodeFolder = apiResponse.generatedCodeFolder;
+    }
+    if (apiResponse && apiResponse.pid) {
+      pid = apiResponse.pid;
+    }
     switch (codeState) {
       case 'initial':
-        response = await generateCode(text, applyExtraStyling);
+        response = await generateCode(text, applyExtraStyling, generatedCodeFolder);
         break;
       case 'edit':
-        response = await editCode(text, tempGeneratedCode);
+        response = await editCode(text, tempGeneratedCode, generatedCodeFolder, pid);
         break;
       default:
-        response = await generateCode(text, applyExtraStyling);
+        response = await generateCode(text, applyExtraStyling, generatedCodeFolder);
         break;
     }
     console.log("Response: ", response);
     if (response.requestedInformation) {
       setTempGeneratedCode(response.code);
+      setApiResponse(response);
       setAdditionalInformation(response.requestedInformation);
       setLoading(false);
     } else {
       setCodeState('edit');
+      setAdditionalInformation(null);
       setTempGeneratedCode(response.code);
       if (appOutput === '') {
         setOutput(response.result);
