@@ -120,7 +120,14 @@ const App = () => {
       {Object.keys(requestedAdditionalInformation).length > 0 &&
         <AdditionalInformationForm requestedAdditionalInformation={requestedAdditionalInformation} onSubmit={handleAdditionalInformationSubmit}/>
       }
-      {appOutput && <QRCode value={appOutput} />}
+      {
+        appOutput && 
+          <>
+            <QRCode value={appOutput} />
+            <p>Scan the QR code above to access the app!</p>
+            <a href={appOutput}>Or, click here if you're on a phone.</a>
+          </>
+      }
     </div>
   );
 };
