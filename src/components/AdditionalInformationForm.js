@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import QRCode from 'qrcode.react';
 import { Spin } from 'antd';
 
 const AdditionalInformationForm = ({ requestedAdditionalInformation, onSubmit }) => {
   const [formData, setFormData] = useState({});
-  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -43,11 +40,6 @@ const AdditionalInformationForm = ({ requestedAdditionalInformation, onSubmit })
         </div>
       ))}
       <button style={styles.button} onClick={handleSubmit}>Submit</button>
-      {loading && 
-        <div style={styles.loadingContainer}>
-          <Spin tip="This request may take up to two minutes to complete. Give us a moment while our elves work..." />
-        </div>
-      }
     </div>
   );
 };
