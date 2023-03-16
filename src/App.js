@@ -55,7 +55,7 @@ const App = () => {
       setCodeState('edit');
       setTempGeneratedCode(response.code);
       setApiResponse(response);
-      if (appOutput === '') {
+      if (response && response.result) {
         setOutput(response.result);
       }
     }
