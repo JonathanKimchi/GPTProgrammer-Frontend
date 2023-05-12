@@ -12,8 +12,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<RedirectComponent></RedirectComponent>} />
-        <Route exact path="/test-endpoint-123" element={<App />} />
+        <Route path='/' element={<App/>} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
